@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,19 +26,4 @@ Route::get('/test', function () {
     ]);
 });
 
-Route::get('/post/{post}', function($post) {
-    
-    $posts = [
-        'first-post' => 'Hello, first post',
-        'second-post' => 'Second Post..=)'
-
-    ];
-
-    if (! array_key_exists($post, $posts)){
-        abort(404, 'Sorry, post not found.');
-    }
-    
-    return view('post', [
-        'post' => $posts[$post]
-    ]);
-});
+Route::get('/post/{post}', [PostsController::class, 'show']);
